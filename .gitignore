@@ -1,0 +1,47 @@
+# Godot generated project and editor cache
+.godot/
+
+# JetBrains IDE settings
+.idea/
+
+# Temporary files and local runtime output
+tmp_*
+*.tmp
+*.log
+mcp_runtime_req.json
+mcp_runtime_res.json
+mcp_screenshot_req.json
+mcp_screenshot_res.png
+mcp_screenshot_meta.json
+
+# Local asset archives; keep source assets in the repository instead
+**/*.zip
+
+# Optional/unreferenced design assets not included in the initial commit
+/UI/Assets/Effects/
+/UI/Assets/References/
+/UI/Assets/UI/Archive/
+/UI/Assets/UI/Chapter/
+/UI/Assets/UI/Common/
+/UI/Assets/UI/Equipment/
+/UI/Assets/UI/Inventory/
+/UI/Assets/UI/Settings/
+/UI/Assets/UI/Skill/
+/UI/Assets/UI/Talent/
+/UI/Assets/asset_list.txt
+/UI/Assets/Characters/Player/player_base.png*
+/UI/Assets/Characters/Zombie/Basic/zombie_basic.png*
+/UI/Assets/Environment/Desktop/cat_decoration.png*
+/UI/Assets/Environment/Desktop/coffee_cup.png*
+/UI/Assets/Environment/Desktop/keyboard.png*
+/UI/Assets/Environment/Desktop/mouse.png*
+/UI/Assets/Environment/Desktop/sticky_note.png*
+/UI/Assets/UI/Imported/*
+!/UI/Assets/UI/Imported/coin_icon.png
+!/UI/Assets/UI/Imported/coin_icon.png.import
+!/UI/Assets/UI/Imported/damage_popup.png
+!/UI/Assets/UI/Imported/damage_popup.png.import
+
+# OS metadata
+.DS_Store
+Thumbs.db

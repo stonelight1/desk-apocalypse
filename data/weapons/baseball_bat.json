@@ -1,0 +1,6 @@
+{
+    "id":"baseball_bat",
+    "type":"melee",
+    "attack":10,
+    "attack_speed":1
+}

@@ -1,0 +1,8 @@
+{
+    "id":"zombie_basic_01",
+    "hp":100,
+    "attack":10,
+    "speed":40,
+    "attack_range":40,
+    "attack_interval":2
+}
