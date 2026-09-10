@@ -1,0 +1,185 @@
+[gd_resource type="SpriteFrames" load_steps=30 format=3]
+
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/idle.png" id="1_player_idle"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/walk.png" id="2_player_walk"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/attack.png" id="3_player_attack"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/hit.png" id="4_player_hit"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/death.png" id="5_player_death"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_idle_0"]
+atlas = ExtResource("1_player_idle")
+region = Rect2(33, 262, 426, 402)
+margin = Rect2(60, 84, 120, 87)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_idle_1"]
+atlas = ExtResource("1_player_idle")
+region = Rect2(455, 262, 421, 402)
+margin = Rect2(62.5, 84, 125, 87)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_idle_2"]
+atlas = ExtResource("1_player_idle")
+region = Rect2(872, 262, 427, 402)
+margin = Rect2(59.5, 84, 119, 87)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_idle_3"]
+atlas = ExtResource("1_player_idle")
+region = Rect2(1295, 262, 434, 402)
+margin = Rect2(56, 84, 112, 87)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_walk_0"]
+atlas = ExtResource("2_player_walk")
+region = Rect2(24, 213, 358, 392)
+margin = Rect2(94, 92, 188, 97)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_walk_1"]
+atlas = ExtResource("2_player_walk")
+region = Rect2(378, 213, 355, 392)
+margin = Rect2(95.5, 92, 191, 97)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_walk_2"]
+atlas = ExtResource("2_player_walk")
+region = Rect2(729, 213, 361, 392)
+margin = Rect2(92.5, 92, 185, 97)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_walk_3"]
+atlas = ExtResource("2_player_walk")
+region = Rect2(1086, 213, 359, 392)
+margin = Rect2(93.5, 92, 187, 97)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_walk_4"]
+atlas = ExtResource("2_player_walk")
+region = Rect2(1441, 213, 358, 392)
+margin = Rect2(94, 92, 188, 97)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_walk_5"]
+atlas = ExtResource("2_player_walk")
+region = Rect2(1795, 213, 358, 392)
+margin = Rect2(94, 92, 188, 97)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_attack_0"]
+atlas = ExtResource("3_player_attack")
+region = Rect2(11, 175, 433, 454)
+margin = Rect2(56.5, 33, 113, 35)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_attack_1"]
+atlas = ExtResource("3_player_attack")
+region = Rect2(440, 175, 487, 454)
+margin = Rect2(29.5, 31, 59, 35)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_attack_2"]
+atlas = ExtResource("3_player_attack")
+region = Rect2(923, 175, 378, 454)
+margin = Rect2(84, 31, 168, 35)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_attack_3"]
+atlas = ExtResource("3_player_attack")
+region = Rect2(1297, 175, 504, 454)
+margin = Rect2(21, 31, 42, 35)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_attack_4"]
+atlas = ExtResource("3_player_attack")
+region = Rect2(1797, 175, 363, 454)
+margin = Rect2(91.5, 31, 183, 35)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_hit_0"]
+atlas = ExtResource("4_player_hit")
+region = Rect2(79, 233, 545, 482)
+margin = Rect2(0.5, 2, 1, 7)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_hit_1"]
+atlas = ExtResource("4_player_hit")
+region = Rect2(620, 233, 546, 482)
+margin = Rect2(0, 2, 0, 7)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_hit_2"]
+atlas = ExtResource("4_player_hit")
+region = Rect2(1162, 233, 545, 482)
+margin = Rect2(0.5, 2, 1, 7)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_death_0"]
+atlas = ExtResource("5_player_death")
+region = Rect2(8, 207, 317, 344)
+margin = Rect2(114.5, 145, 229, 145)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_death_1"]
+atlas = ExtResource("5_player_death")
+region = Rect2(321, 207, 354, 344)
+margin = Rect2(96, 145, 192, 145)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_death_2"]
+atlas = ExtResource("5_player_death")
+region = Rect2(671, 207, 343, 344)
+margin = Rect2(101.5, 145, 203, 145)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_death_3"]
+atlas = ExtResource("5_player_death")
+region = Rect2(1010, 207, 389, 344)
+margin = Rect2(78.5, 142, 157, 145)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_death_4"]
+atlas = ExtResource("5_player_death")
+region = Rect2(1395, 207, 434, 344)
+margin = Rect2(56, 142, 112, 145)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_player_death_5"]
+atlas = ExtResource("5_player_death")
+region = Rect2(1825, 207, 340, 344)
+margin = Rect2(103, 142, 206, 145)
+filter_clip = true
+
+[resource]
+animations = [
+{
+"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_player_idle_0")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_idle_1")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_idle_2")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_idle_3")}],
+"loop": true,
+"name": &"player_idle",
+"speed": 6.0
+},
+{
+"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_player_walk_0")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_walk_1")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_walk_2")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_walk_3")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_walk_4")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_walk_5")}],
+"loop": true,
+"name": &"player_walk",
+"speed": 8.0
+},
+{
+"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_player_attack_0")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_attack_1")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_attack_2")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_attack_3")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_attack_4")}],
+"loop": false,
+"name": &"player_attack",
+"speed": 8.0
+},
+{
+"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_player_hit_0")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_hit_1")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_hit_2")}],
+"loop": false,
+"name": &"player_hit",
+"speed": 10.0
+},
+{
+"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_player_death_0")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_death_1")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_death_2")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_death_3")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_death_4")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_player_death_5")}],
+"loop": false,
+"name": &"player_death",
+"speed": 8.0
+}
+]

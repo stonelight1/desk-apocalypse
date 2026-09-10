@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_player_script"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Effects/weapon_swing_01.png" id="2_attack_effect"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_player"]
 radius = 52.0
@@ -10,9 +11,22 @@ collision_layer = 2
 collision_mask = 1
 script = ExtResource("1_player_script")
 
+[node name="FootShadow" type="Polygon2D" parent="."]
+position = Vector2(0, 34)
+z_index = -1
+polygon = PackedVector2Array(-48, 0, -40, -7, -24, -11, 0, -13, 24, -11, 40, -7, 48, 0, 40, 7, 24, 11, 0, 13, -24, 11, -40, 7)
+color = Color(0.035, 0.022, 0.018, 0.42)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -50)
-scale = Vector2(0.22, 0.22)
+scale = Vector2(0.3, 0.3)
+
+[node name="AttackEffect" type="Sprite2D" parent="."]
+position = Vector2(-58, -72)
+z_index = 6
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("2_attack_effect")
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -35)

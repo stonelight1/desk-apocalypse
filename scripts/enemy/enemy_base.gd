@@ -4,6 +4,11 @@ signal died(enemy: Node2D)
 
 const DATA_LOADER = preload("res://scripts/core/data_loader.gd")
 const DAMAGE_POPUP_SCENE: PackedScene = preload("res://scenes/ui/damage_popup.tscn")
+const PLAYER_CONTROLLER_SCRIPT = preload("res://scripts/player/player_controller.gd")
+const BATTLE_AREA_LEFT: float = PLAYER_CONTROLLER_SCRIPT.BATTLE_AREA_LEFT
+const BATTLE_AREA_RIGHT: float = PLAYER_CONTROLLER_SCRIPT.BATTLE_AREA_RIGHT
+const BATTLE_AREA_TOP: float = PLAYER_CONTROLLER_SCRIPT.BATTLE_AREA_TOP
+const BATTLE_AREA_BOTTOM: float = PLAYER_CONTROLLER_SCRIPT.BATTLE_AREA_BOTTOM
 const DATA_PATH: String = "res://data/enemies/zombie_basic_01.json"
 const ANIMATION_DATA_PATH: String = "res://UI/Assets/Characters/Zombie/Basic/Config/animation_data.json"
 const ANIMATION_TEXTURE_PATHS := {
@@ -47,12 +52,15 @@ func _ready() -> void:
 	attack_interval = float(data.get("attack_interval", attack_interval))
 	hp = max_hp
 	target = get_node_or_null(target_path) as Node2D
+	_clamp_to_battle_area()
 	_play_animation("walk")
 
 func _physics_process(delta: float) -> void:
 	if current_state == "dead":
 		velocity = Vector2.ZERO
 		return
+
+	_clamp_to_battle_area()
 
 	if not is_instance_valid(target):
 		target = get_node_or_null(target_path) as Node2D
@@ -74,6 +82,7 @@ func _physics_process(delta: float) -> void:
 	if hit_timer > 0.0 or animation_timer > 0.0:
 		velocity = Vector2.ZERO
 		sprite.flip_h = horizontal_distance > 0.0
+		_clamp_to_battle_area()
 		return
 
 	if abs(horizontal_distance) <= maxf(attack_range, MIN_ATTACK_RANGE):
@@ -95,6 +104,7 @@ func _physics_process(delta: float) -> void:
 		if hit_timer <= 0.0 and animation_timer <= 0.0:
 			_play_animation("walk")
 		move_and_slide()
+		_clamp_to_battle_area()
 
 func _get_separation_velocity() -> float:
 	var own_slot := int(get_meta("spawn_point_index", -1))
@@ -118,6 +128,12 @@ func _get_separation_velocity() -> float:
 			if horizontal_gap < MIN_SEPARATION:
 				separation += SEPARATION_SPEED * clampf((MIN_SEPARATION - horizontal_gap) / MIN_SEPARATION, 0.0, 1.0)
 	return separation
+
+func _clamp_to_battle_area() -> void:
+	var clamped_x := clampf(global_position.x, BATTLE_AREA_LEFT, BATTLE_AREA_RIGHT)
+	var clamped_y := clampf(global_position.y, BATTLE_AREA_TOP, BATTLE_AREA_BOTTOM)
+	if global_position.x != clamped_x or global_position.y != clamped_y:
+		global_position = Vector2(clamped_x, clamped_y)
 
 func take_damage(value: int) -> void:
 	if current_state == "dead":

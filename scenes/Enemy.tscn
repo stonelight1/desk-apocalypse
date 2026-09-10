@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_enemy"]
+[ext_resource type="SpriteFrames" path="res://UI/Assets/Characters/Zombie/Basic/Config/zombie_sprite_frames.tres" id="2_enemy_frames"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
+radius = 16.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_enemy")
+
+[node name="Visual" type="Polygon2D" parent="."]
+visible = false
+z_index = 1
+polygon = PackedVector2Array(-18, -14, 0, -20, 18, -14, 22, 0, 18, 14, 0, 20, -18, 14, -22, 0)
+color = Color(0.15, 0.8, 0.3, 1)
+
+[node name="Shadow" type="Polygon2D" parent="."]
+z_index = 1
+position = Vector2(0, 82)
+polygon = PackedVector2Array(-34, 0, -32, -3, -28, -5, -20, -6.5, -11, -7.5, 0, -8, 11, -7.5, 20, -6.5, 28, -5, 32, -3, 34, 0, 32, 3, 28, 5, 20, 6.5, 11, 7.5, 0, 8, -11, 7.5, -20, 6.5, -28, 5, -32, 3)
+color = Color(0, 0, 0, 0.35)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+position = Vector2(0, 12)
+scale = Vector2(0.37, 0.37)
+sprite_frames = ExtResource("2_enemy_frames")
+animation = &"zombie_idle"
+autoplay = "zombie_idle"
+flip_h = false
+
+[node name="HPBar" type="ProgressBar" parent="."]
+visible = false
+z_index = 2
+offset_left = -32.0
+offset_top = -42.0
+offset_right = 32.0
+offset_bottom = -34.0
+mouse_filter = 2
+show_percentage = false
+
+[node name="HPLabel" type="Label" parent="."]
+visible = false
+z_index = 2
+offset_left = -32.0
+offset_top = -66.0
+offset_right = 32.0
+offset_bottom = -44.0
+mouse_filter = 2
+text = "0 / 0"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_enemy")

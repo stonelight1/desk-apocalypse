@@ -9,10 +9,15 @@ enum State {
 }
 
 const SPEED: float = 55.0
-const PATROL_LEFT: float = 420.0
-const PATROL_RIGHT: float = 860.0
+const BATTLE_AREA_LEFT: float = 128.0
+const BATTLE_AREA_RIGHT: float = 1152.0
+const BATTLE_AREA_TOP: float = 430.0
+const BATTLE_AREA_BOTTOM: float = 560.0
+const PATROL_LEFT: float = 760.0
+const PATROL_RIGHT: float = 960.0
 const DATA_LOADER = preload("res://scripts/core/data_loader.gd")
 const DAMAGE_POPUP_SCENE: PackedScene = preload("res://scenes/ui/damage_popup.tscn")
+const HIT_EFFECT_TEXTURE: Texture2D = preload("res://UI/Assets/Effects/melee_hit_01.png")
 const WEAPON_DATA_PATH: String = "res://data/weapons/baseball_bat.json"
 const ANIMATION_DATA_PATH: String = "res://UI/Assets/Characters/Player/Config/animation_data.json"
 const ANIMATION_TEXTURE_PATHS := {
@@ -49,18 +54,23 @@ var pending_damage: int = 0
 var pending_attack_timer: float = 0.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attack_effect: Sprite2D = $AttackEffect
 @onready var game_manager: Node = get_node("/root/GameManager")
 
 func _ready() -> void:
     _setup_animations()
     sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+    attack_effect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
     var weapon_data := DATA_LOADER.load_json(WEAPON_DATA_PATH)
     attack_damage = int(weapon_data.get("attack", attack_damage))
     attack_interval = float(weapon_data.get("attack_speed", attack_interval))
     hp = max_hp
     spawn_position = global_position
-    current_state = State.WALK
-    _play_animation("walk")
+    direction = -1.0
+    current_state = State.IDLE
+    attack_effect.visible = false
+    _clamp_to_battle_area()
+    _play_animation("idle")
 
 func _physics_process(delta: float) -> void:
     if current_state == State.DEATH:
@@ -79,38 +89,37 @@ func _physics_process(delta: float) -> void:
     elif animation_timer > 0.0:
         current_state = State.ATTACK
     else:
-        current_state = State.WALK
-        _play_animation("walk")
+        current_state = State.IDLE
+        _play_animation("idle")
 
     # 攻击/受击演出期间锁定位置，避免出现边挥棒边后退的视觉错误。
     if hit_timer > 0.0 or animation_timer > 0.0:
         velocity = Vector2.ZERO
         sprite.flip_h = direction > 0.0
+        _clamp_to_battle_area()
         return
 
-    var target := _find_nearest_enemy()
-    if is_instance_valid(target):
-        var horizontal_distance := target.global_position.x - global_position.x
-        if abs(horizontal_distance) > ATTACK_RANGE:
+    # 玩家保持在右侧战斗位，不主动追击左侧丧尸；丧尸负责接近玩家。
+    var attack_target := _find_nearest_enemy(ATTACK_RANGE)
+    if is_instance_valid(attack_target):
+        var horizontal_distance := attack_target.global_position.x - global_position.x
+        velocity = Vector2.ZERO
+        if horizontal_distance != 0.0:
             direction = 1.0 if horizontal_distance > 0.0 else -1.0
-            velocity = Vector2(direction * SPEED, 0.0)
-        else:
-            velocity = Vector2.ZERO
-            if horizontal_distance != 0.0:
-                direction = 1.0 if horizontal_distance > 0.0 else -1.0
     else:
         velocity = Vector2(direction * SPEED, 0.0)
-        if global_position.x <= PATROL_LEFT:
-            global_position.x = PATROL_LEFT
+        if global_position.x <= PATROL_LEFT and direction < 0.0:
             direction = 1.0
-        elif global_position.x >= PATROL_RIGHT:
-            global_position.x = PATROL_RIGHT
+        elif global_position.x >= PATROL_RIGHT and direction > 0.0:
             direction = -1.0
+        current_state = State.WALK
+        _play_animation("walk")
 
     move_and_slide()
+    _clamp_to_battle_area()
     # The supplied character art faces left by default, so flip only while moving right.
     sprite.flip_h = direction > 0.0
-    if current_state == State.WALK and attack_cooldown == 0.0:
+    if is_instance_valid(attack_target) and attack_cooldown == 0.0:
         _auto_attack()
         attack_cooldown = attack_interval
 
@@ -122,6 +131,7 @@ func _auto_attack() -> void:
     current_state = State.ATTACK
     animation_timer = ATTACK_ANIMATION_DURATION
     _play_animation("attack")
+    _show_attack_effect()
     last_attack_damage = attack_damage + game_manager.weapon_bonus_damage
     pending_target = target
     pending_damage = last_attack_damage
@@ -133,8 +143,35 @@ func _resolve_pending_attack() -> void:
     pending_target = null
     if not is_instance_valid(target) or not target.has_method("take_damage"):
         return
+    _spawn_hit_effect(target)
     target.take_damage(pending_damage)
     attack_count += 1
+
+func _show_attack_effect() -> void:
+    attack_effect.visible = true
+    attack_effect.modulate.a = 1.0
+    attack_effect.scale = Vector2.ONE * 0.09
+    attack_effect.flip_h = direction > 0.0
+    attack_effect.position = Vector2(-58.0 if direction < 0.0 else 58.0, -72.0)
+    var tween := attack_effect.create_tween()
+    tween.tween_property(attack_effect, "modulate:a", 0.0, 0.24).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+    tween.tween_callback(_hide_attack_effect)
+
+func _hide_attack_effect() -> void:
+    attack_effect.visible = false
+
+func _spawn_hit_effect(target: Node2D) -> void:
+    var effect := Sprite2D.new()
+    effect.texture = HIT_EFFECT_TEXTURE
+    effect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+    effect.z_index = 30
+    effect.scale = Vector2.ONE * 0.07
+    get_tree().current_scene.add_child(effect)
+    effect.global_position = target.global_position + Vector2(0.0, -62.0)
+    var tween := effect.create_tween().set_parallel(true)
+    tween.tween_property(effect, "scale", Vector2.ONE * 0.1, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+    tween.tween_property(effect, "modulate:a", 0.0, 0.24).set_delay(0.04)
+    tween.chain().tween_callback(effect.queue_free)
 
 func _find_nearest_enemy(max_distance: float = INF) -> Node2D:
     var nearest: Node2D
@@ -147,6 +184,16 @@ func _find_nearest_enemy(max_distance: float = INF) -> Node2D:
             nearest_distance = distance
             nearest = candidate as Node2D
     return nearest
+
+func _clamp_to_battle_area() -> void:
+    var clamped_x := clampf(global_position.x, BATTLE_AREA_LEFT, BATTLE_AREA_RIGHT)
+    var clamped_y := clampf(global_position.y, BATTLE_AREA_TOP, BATTLE_AREA_BOTTOM)
+    if global_position.x != clamped_x or global_position.y != clamped_y:
+        global_position = Vector2(clamped_x, clamped_y)
+    if clamped_x <= BATTLE_AREA_LEFT:
+        direction = 1.0
+    elif clamped_x >= BATTLE_AREA_RIGHT:
+        direction = -1.0
 
 func take_damage(value: int) -> void:
     if current_state == State.DEATH:

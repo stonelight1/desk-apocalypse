@@ -13,9 +13,15 @@ z_index = 8
 script = ExtResource("1_enemy")
 target_path = NodePath("../Player")
 
+[node name="FootShadow" type="Polygon2D" parent="."]
+position = Vector2(0, 26)
+z_index = -1
+polygon = PackedVector2Array(-40, 0, -33, -6, -20, -9, 0, -11, 20, -9, 33, -6, 40, 0, 33, 6, 20, 9, 0, 11, -20, 9, -33, 6)
+color = Color(0.035, 0.022, 0.018, 0.38)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -52)
-scale = Vector2(0.18, 0.18)
+scale = Vector2(0.25, 0.25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -42)

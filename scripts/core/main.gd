@@ -1,7 +1,6 @@
 extends Node2D
 
 const ZOMBIE_SCENE: PackedScene = preload("res://scenes/enemy/zombie_basic.tscn")
-const COIN_SCENE: PackedScene = preload("res://scenes/items/coin_pickup.tscn")
 # 参考图的挂机构图是“主角在右、丧尸从左侧接近”，避免开局右侧出现敌人。
 const ZOMBIE_SPAWN_POINTS := [Vector2(240, 500), Vector2(400, 500), Vector2(560, 500)]
 const ZOMBIE_RESPAWN_DELAY: float = 3.0
@@ -30,9 +29,6 @@ func _spawn_zombie(spawn_point_index: int) -> void:
 
 func _on_zombie_died(enemy: Node2D) -> void:
     game_manager.add_experience(10)
-    var coin := COIN_SCENE.instantiate()
-    coin.position = enemy.position
-    add_child(coin)
     var spawn_point_index := int(enemy.get_meta("spawn_point_index", -1))
     if spawn_point_index >= 0:
         get_tree().create_timer(ZOMBIE_RESPAWN_DELAY).timeout.connect(_respawn_zombie.bind(spawn_point_index))

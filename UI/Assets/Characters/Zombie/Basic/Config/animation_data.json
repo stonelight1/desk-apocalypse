@@ -1,1 +1,49 @@
-{"animations":{"idle":{"frames":4,"fps":6,"loop":true,"rects":[[60,50,526,622],[582,50,526,622],[1104,50,526,622],[1626,50,526,622]]},"walk":{"frames":6,"fps":8,"loop":true,"rects":[[18,139,347,522],[361,139,360,522],[717,139,361,522],[1074,139,362,522],[1432,139,376,522],[1804,139,347,522]]},"attack":{"frames":5,"fps":8,"loop":false,"rects":[[58,185,393,455],[447,185,442,455],[885,185,441,455],[1322,185,414,455],[1732,185,402,455]]},"hit":{"frames":3,"fps":10,"loop":false,"rects":[[56,173,554,595],[606,173,555,595],[1157,173,554,595]]},"death":{"frames":6,"fps":8,"loop":false,"rects":[[62,193,289,369],[347,193,305,369],[648,193,354,369],[998,193,337,369],[1331,193,411,369],[1738,193,402,369]]}}}
+{
+  "meta": {
+    "name": "Zombie Basic",
+    "canvas_size": [
+      512,
+      512
+    ],
+    "orientation": "left",
+    "format": "single_png_frames",
+    "pivot_note": "stand and motion frames aligned near common foot baseline; death frames aligned to a common root line"
+  },
+  "animations": {
+    "idle": {
+      "dir": "Animations/Idle",
+      "prefix": "idle_",
+      "frames": 4,
+      "fps": 4,
+      "loop": true
+    },
+    "walk": {
+      "dir": "Animations/Walk",
+      "prefix": "walk_",
+      "frames": 6,
+      "fps": 8,
+      "loop": true
+    },
+    "attack": {
+      "dir": "Animations/Attack",
+      "prefix": "attack_",
+      "frames": 5,
+      "fps": 10,
+      "loop": false
+    },
+    "hit": {
+      "dir": "Animations/Hit",
+      "prefix": "hit_",
+      "frames": 3,
+      "fps": 12,
+      "loop": false
+    },
+    "death": {
+      "dir": "Animations/Death",
+      "prefix": "death_",
+      "frames": 6,
+      "fps": 8,
+      "loop": false
+    }
+  }
+}
