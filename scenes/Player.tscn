@@ -1,33 +1,174 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=33 format=3]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
-[ext_resource type="SpriteFrames" path="res://UI/Assets/Characters/Player/Config/player_sprite_frames.tres" id="2_player_frames"]
+[ext_resource type="Script" path="res://scripts/player_animation_validation.gd" id="1_player_validation"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Idle_Body/idle_body_01.png" id="2_idle_01"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Idle_Body/idle_body_02.png" id="3_idle_02"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Idle_Body/idle_body_03.png" id="4_idle_03"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Idle_Body/idle_body_04.png" id="5_idle_04"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_01.png" id="6_walk_01"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_02.png" id="7_walk_02"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_03.png" id="8_walk_03"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_04.png" id="9_walk_04"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_05.png" id="10_walk_05"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_06.png" id="11_walk_06"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_07.png" id="26_walk_07"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_08.png" id="27_walk_08"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_09.png" id="28_walk_09"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_10.png" id="29_walk_10"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_11.png" id="30_walk_11"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Walk_Body/walk_body_12.png" id="31_walk_12"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Attack_Body/attack_body_01.png" id="12_attack_01"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Attack_Body/attack_body_02.png" id="13_attack_02"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Attack_Body/attack_body_03.png" id="14_attack_03"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Attack_Body/attack_body_04.png" id="15_attack_04"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Attack_Body/attack_body_05.png" id="16_attack_05"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Hit_Body/hit_body_01.png" id="17_hit_01"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Hit_Body/hit_body_02.png" id="18_hit_02"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Hit_Body/hit_body_03.png" id="19_hit_03"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Death_Body/death_body_01.png" id="20_death_01"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Death_Body/death_body_02.png" id="21_death_02"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Death_Body/death_body_03.png" id="22_death_03"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Death_Body/death_body_04.png" id="23_death_04"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Death_Body/death_body_05.png" id="24_death_05"]
+[ext_resource type="Texture2D" path="res://UI/Assets/Characters/Player/Animations/Death_Body/death_body_06.png" id="25_death_06"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_player"]
-radius = 16.0
+[sub_resource type="SpriteFrames" id="SpriteFrames_player_v03"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_idle_01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_idle_02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_idle_03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_idle_04")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_walk_01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_walk_02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_walk_03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_walk_04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_walk_05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_walk_06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_walk_07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_walk_08")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_walk_09")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_walk_10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_walk_11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_walk_12")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_attack_01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_attack_02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_attack_03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_attack_04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_attack_05")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_hit_01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_hit_02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_hit_03")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_death_01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_death_02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_death_03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_death_04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_death_05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_death_06")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player_v03"]
+radius = 18.0
+height = 58.0
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_player")
-
-[node name="Visual" type="Polygon2D" parent="."]
-visible = false
-z_index = 1
-polygon = PackedVector2Array(-18, -14, 18, -14, 18, 14, -18, 14)
-color = Color(0.1, 0.4, 1, 1)
-
-[node name="Shadow" type="Polygon2D" parent="."]
-z_index = 1
-position = Vector2(0, 82)
-polygon = PackedVector2Array(-32, 0, -30, -3, -26, -5, -19, -6.5, -10, -7.5, 0, -8, 10, -7.5, 19, -6.5, 26, -5, 30, -3, 32, 0, 30, 3, 26, 5, 19, 6.5, 10, 7.5, 0, 8, -10, 7.5, -19, 6.5, -26, 5, -30, 3)
-color = Color(0, 0, 0, 0.35)
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_player_validation")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 2
-scale = Vector2(0.32, 0.32)
-sprite_frames = ExtResource("2_player_frames")
-animation = &"player_idle"
-autoplay = "player_idle"
-flip_h = false
+position = Vector2(0, -58)
+scale = Vector2(0.3, 0.3)
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_player_v03")
+animation = &"Idle"
+autoplay = "Idle"
+centered = true
+offset = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_player")
+position = Vector2(0, -29)
+shape = SubResource("CapsuleShape2D_player_v03")

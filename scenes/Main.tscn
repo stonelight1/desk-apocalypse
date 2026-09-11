@@ -1,77 +1,50 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1_player"]
-[ext_resource type="PackedScene" path="res://scenes/Enemy.tscn" id="2_enemy"]
-[ext_resource type="Script" path="res://scripts/battle_manager.gd" id="3_battle_manager"]
-[ext_resource type="Texture2D" path="res://UI/Assets/Environment/Desktop/desk_background.png" id="4_background"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_battle_left"]
-size = Vector2(20, 320)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_battle_right"]
-size = Vector2(20, 320)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_battle_top"]
-size = Vector2(1040, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_battle_bottom"]
-size = Vector2(1040, 20)
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1_player_validation"]
 
 [node name="Main" type="Node2D"]
 
-[node name="BattleBackground" type="Sprite2D" parent="."]
-z_index = -10
-position = Vector2(640, 360)
-scale = Vector2(0.76555, 0.76514)
-texture = ExtResource("4_background")
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.035, 0.047, 0.071, 1)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(640, 360)
-zoom = Vector2(1, 1)
-enabled = true
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(80, 470, 1200, 470, 1200, 540, 80, 540)
+color = Color(0.078, 0.11, 0.15, 1)
 
-[node name="BattleArea" type="StaticBody2D" parent="."]
-collision_layer = 1
-collision_mask = 1
+[node name="GroundLine" type="Line2D" parent="."]
+points = PackedVector2Array(80, 470, 1200, 470)
+width = 2.0
+default_color = Color(0.31, 0.67, 0.72, 0.8)
 
-[node name="LeftBoundary" type="CollisionShape2D" parent="BattleArea"]
-position = Vector2(120, 400)
-shape = SubResource("RectangleShape2D_battle_left")
+[node name="Title" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 28.0
+offset_right = 700.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.84, 0.95, 0.96, 1)
+theme_override_font_sizes/font_size = 26
+text = "桌边末日 · V0.3 Player Animation Validation"
 
-[node name="RightBoundary" type="CollisionShape2D" parent="BattleArea"]
-position = Vector2(1160, 400)
-shape = SubResource("RectangleShape2D_battle_right")
+[node name="Instructions" type="Label" parent="."]
+offset_left = 42.0
+offset_top = 82.0
+offset_right = 1120.0
+offset_bottom = 122.0
+theme_override_colors/font_color = Color(0.58, 0.72, 0.76, 1)
+theme_override_font_sizes/font_size = 18
+text = "A / D  移动        J  Attack        H  Hit        K  Death"
 
-[node name="TopBoundary" type="CollisionShape2D" parent="BattleArea"]
-position = Vector2(640, 240)
-shape = SubResource("RectangleShape2D_battle_top")
+[node name="Scope" type="Label" parent="."]
+offset_left = 42.0
+offset_top = 126.0
+offset_right = 900.0
+offset_bottom = 154.0
+theme_override_colors/font_color = Color(0.4, 0.49, 0.54, 1)
+theme_override_font_sizes/font_size = 14
+text = "仅验证 Player：Idle / Walk 循环，Attack / Hit / Death 单次播放"
 
-[node name="BottomBoundary" type="CollisionShape2D" parent="BattleArea"]
-position = Vector2(640, 560)
-shape = SubResource("RectangleShape2D_battle_bottom")
-
-[node name="EnemySpawnPoints" type="Node2D" parent="BattleArea"]
-
-[node name="EnemySpawnPoint_01" type="Marker2D" parent="BattleArea/EnemySpawnPoints"]
-position = Vector2(150, 400)
-
-[node name="EnemySpawnPoint_02" type="Marker2D" parent="BattleArea/EnemySpawnPoints"]
-position = Vector2(260, 400)
-
-[node name="EnemySpawnPoint_03" type="Marker2D" parent="BattleArea/EnemySpawnPoints"]
-position = Vector2(370, 400)
-
-[node name="BattleManager" type="Node" parent="."]
-script = ExtResource("3_battle_manager")
-
-[node name="Player" parent="." instance=ExtResource("1_player")]
-position = Vector2(1000, 400)
-
-[node name="Enemy_01" parent="." instance=ExtResource("2_enemy")]
-position = Vector2(150, 400)
-
-[node name="Enemy_02" parent="." instance=ExtResource("2_enemy")]
-position = Vector2(260, 400)
-
-[node name="Enemy_03" parent="." instance=ExtResource("2_enemy")]
-position = Vector2(370, 400)
+[node name="Player" parent="." instance=ExtResource("1_player_validation")]
+position = Vector2(640, 470)
